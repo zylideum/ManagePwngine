@@ -38,10 +38,10 @@ to write arbitrary files in arbitrary locations.
 ## shell
 
 The `shell` payload requires the following arguments:
-- --lhost: Your listener IP.
-- --lport: Your listener port.
-- --dll: The name of the malicious DLL that will be loaded remotely by PostgreSQL. See the DLL section for more information.
-- --smbshare: The name of your SMB share hosting the malicious DLL.
+- `--lhost`: Your listener IP.
+- `--lport`: Your listener port.
+- `--dll`: The name of the malicious DLL that will be loaded remotely by PostgreSQL. See the DLL section for more information.
+- `--smbshare`: The name of your SMB share hosting the malicious DLL.
 
 Optionally:
 - --function: The name of the function within the DLL that creates the reverse shell connection. See the DLL section for more information.
@@ -49,14 +49,14 @@ Optionally:
 The payload will use `CREATE OR REPLACE FUNCTION` to create a User-Defined Function (UDF) that PostgreSQL will load from a remote location - your SMB share.
 Once the UDF is created, it is triggered to call your reverse shell. The success of this injection hinges on your compiled DLL.
 
-![shell payload](shell.png)
+![shell payload](/static/shell.png)
 
 ## ezshell
 
 The `ezshell` payload requires the following arguments:
-- --lhost: Your listener IP.
-- --lport: Your listener port.
-- --dll: The name of the malicious DLL saved locally.
+- `--lhost`: Your listener IP.
+- `--lport`: Your listener port.
+- `--dll`: The name of the malicious DLL saved locally.
 
 Optionally:
 - --function: The name of the function within the DLL that creates the reverse shell connection. See the DLL section for more information.
@@ -65,7 +65,7 @@ The payload will inject your DLL into the `pg_largeobject` table, 2048 bytes at 
 then a UDF will be created and triggered using the newly-saved DLL. This is considered 'ez' since there is no SMB setup or remote calls required, so this is
 exploitable remotely.
 
-![ezshell payload](ezshell.png)
+![ezshell payload](/static/ezshell.png)
 
 ---
 
